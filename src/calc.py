@@ -76,10 +76,12 @@ def overlap_days(
 def compute_window_totals(df: pd.DataFrame, as_of: date) -> Dict[str, int]:
     df = normalize_absence_df(df)
 
+    w7 = as_of + relativedelta(months=-84)    
     w5 = as_of + relativedelta(months=-60)
     w3 = as_of + relativedelta(months=-36)
     w1 = as_of + relativedelta(months=-12)
 
+    last_7y = 0
     last_5y = 0
     last_3y = 0
     last_1y = 0
@@ -89,11 +91,13 @@ def compute_window_totals(df: pd.DataFrame, as_of: date) -> Dict[str, int]:
         ret = row["return_date"]
         if leave is None:
             continue
+        last_7y += overlap_days(leave, ret, w7, as_of)
         last_5y += overlap_days(leave, ret, w5, as_of)
         last_3y += overlap_days(leave, ret, w3, as_of)
         last_1y += overlap_days(leave, ret, w1, as_of)
 
     return {
+        "last_7y_days": int(last_7y),
         "last_5y_days": int(last_5y),
         "last_3y_days": int(last_3y),
         "last_1y_days": int(last_1y),
