@@ -17,10 +17,10 @@ st.set_page_config(
     layout="wide",
 )
 
-st.title("UK Absence Eligibility Dashboard")
+st.title("UK Absence Eligibility Dashboard - FORZA NAPOLI E FORZA CAVESE!!")
 st.caption(
     "A calculator-style dashboard based on the same overlap logic used in your spreadsheet (rolling windows). "
-    "Not legal advice."
+    "Not legal advice fratacchia."
 )
 
 # -----------------------
